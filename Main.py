@@ -1,3 +1,4 @@
+version = 1.1
 import os
 try:
     import sys
@@ -5,8 +6,10 @@ try:
     from colorama import init, Fore, Style; init()
     from bs4 import BeautifulSoup
     from faker import Faker
+    import webbrowser
     import subprocess
     import requests
+    import string
     import random
     import time
     import json
@@ -23,8 +26,21 @@ except ModuleNotFoundError:
         os.system(f"title Satuurn - installing {lib}")
         os.system(f"pip install -q {lib}")
 
-print("Prepearing saturrn...")
+    import sys
+    sys.dont_write_bytecode = True
+    from colorama import init, Fore, Style; init()
+    from bs4 import BeautifulSoup
+    from faker import Faker
+    import webbrowser
+    import subprocess
+    import requests
+    import string
+    import random
+    import time
+    import json
 
+print("Prepearing saturrn...")
+stars = requests.get(f"https://api.github.com/repos/R3CI/Saturrn").json().get("stargazers_count")
 red = Fore.RED
 lred = Fore.LIGHTRED_EX
 yellow = Fore.YELLOW
@@ -38,8 +54,59 @@ orange = "\033[38;2;255;165;0m"
 dorange = "\033[38;2;200;120;0m"
 black = Fore.LIGHTBLACK_EX
 
+class auto_update:
+    try:
+        @staticmethod
+        def get_info():
+            os.system("title Saturrn - Searching for updates")
+            r = requests.get("https://api.github.com/repos/R3CI/Saturrn/releases/latest")
+            if r.status_code == 200:
+                data = r.json()
+                changelog = data.get('body', '')
+                version = float(data['tag_name'].lstrip('v'))
+                return version, changelog
+            else:
+                return None, None
+
+        @staticmethod
+        def update(local, github, changelog):
+            local = float(local)
+            github = float(github)
+            if local == github:
+                pass
+            else:
+                if local < github:
+                    os.system("title Saturrn - Update found")
+                    os.system("cls")
+                    banner = f"""{orange}
+{"                                                               ____        "}
+{"|         | |`````````, |``````.        .'.       `````|````` |            "}
+{"|         | |'''''''''  |       |     .''```.          |      |______      "}
+{"|         | |           |       |   .'       `.        |      |            "}
+{"`._______.' |           |......'  .'           `.      |      |________    "}
+"""
+
+                    print(banner)
+                    print(f"{dorange}Change log\n{changelog}")
+                    input(f"\n{orange}Enter to open GitHub on the newest release")
+                    webbrowser.open("https://github.com/R3CI/Saturrn/releases")
+                    exit()
+
+        gh_version, changelog = get_info()
+        update(version, gh_version, changelog)
+    except Exception as e:
+        print(f"Error: {e}")
+
 class Modules:
-    class TempMail:
+    class star:
+        def __init__(self):
+            pass
+
+        def run(self):
+            webbrowser.open("https://github.com/R3CI/Saturrn")
+            os.system("cls")
+
+    class temp_mail:
         def __init__(self):
             pass
 
@@ -116,7 +183,7 @@ class Modules:
                 print(f"Error decoding JSON: {e}")
                 return []
             
-        def tempmail_run(self):
+        def run(self):
             self.initialize()
             i = 0
             refresh_t = int(input(f"{dorange}({orange}Refresh{dorange}){orange} {res}->{orange} "))
@@ -128,11 +195,11 @@ class Modules:
                 print(f"{dorange}({orange}Refresh{dorange}){orange} {res}->{orange} ", self.refresh(self.TMA, self.PHPSESSID))
                 time.sleep(refresh_t)
 
-    class Cookie_fetcher:
+    class cookie_fetcher:
         def __init__(self):
             pass
 
-        def fetch(self):
+        def run(self):
             url = input(f"{dorange}({orange}URL{dorange}){orange} {res}->{orange} ")
             if not url.startswith(("http://", "https://")):
                 url = f"https://{url}"
@@ -155,7 +222,7 @@ class Modules:
             input(f"{dorange}({orange}Waiting{dorange})")
             os.system("cls")
     
-    class IPgen:
+    class ip_generator:
         def __init__(self):
             pass
         
@@ -185,14 +252,14 @@ class Modules:
             i = 0
             for i in range(amt):
                 i =+ 1
-                ip = Modules.IPgen.generate_ip()
-                r = Modules.IPgen.check_ping(ip)
+                ip = Modules.ip_generator.generate_ip()
+                r = Modules.ip_generator.check_ping(Modules.ip_generator.generate_ip())
                 if r:
                     print(f"{green}(Valid){orange} {res}  ->{orange} {ip} {dorange}({orange}{i}{dorange}){orange}")
                 else:
                     print(f"{red}(Invalid){orange} {res}->{orange} {ip}")
 
-    class IPSearch:
+    class leaked_ip_search:
         def __init__(self):
             pass
         
@@ -222,7 +289,7 @@ class Modules:
             else:
                 return None
 
-        def main(self):
+        def run(self):
             self.initialize()
             mc_username = input(f"{dorange}({orange}Minecraft username{dorange}){orange} {res}->{orange} ")
             ip_address = self.find(mc_username)
@@ -241,7 +308,8 @@ class Modules:
 
             input(f"{dorange}({orange}Waiting{dorange})")
             os.system("cls")
-    class AI:
+
+    class uncensored_ai:
         def __init__(self):
             pass
 
@@ -286,6 +354,32 @@ class Modules:
 """)
             input(f"{dorange}({orange}Waiting{dorange})")
             os.system("cls")
+    
+    class webcam_spy:
+        def __init__(self):
+            pass
+        def run(self):
+            if input(f"{red}Ise a good webbrowser like librewolf to make sure u dont fall to a trap and DO NOT CLICK ON ANY WEBCAM WITH A HONEYPOT TAG understood? (y/n){res} ->{orange} ") == "y":
+                webbrowser.open("https://www.shodan.io/search?query=Webcam")
+            input(f"{dorange}({orange}Waiting{dorange})")
+            os.system("cls")
+
+    class random_ss:
+        def __init__(self):
+            pass
+
+        def run(self):
+            def open():
+                url = f"https://prnt.sc/{''.join(random.choices(string.ascii_lowercase, k=2)) + ''.join(random.choices(string.digits, k=4))}"
+                webbrowser.open(url)
+            open()
+            def ask():
+                if input(f"{orange}Open again? (blank for yes/ n for no){res} ->{orange} ") == "":
+                    open()
+                    ask()
+            ask()
+            input(f"{dorange}({orange}Waiting{dorange})")
+            os.system("cls")
 
 
 version_info = sys.version_info
@@ -303,14 +397,15 @@ while __name__ == "__main__":
 
     print(banner)
     opts = f"""
+stars -> {stars} [star]
 dsc.gg/saturrn      
                                                
-{"[01] -> Temp mail        [07] -> ???              [13] -> ???              [19] -> ???              [25] -> ???              [31] -> ???".center(size)}
+{"[01] -> Temp mail        [07] -> Random ss        [13] -> ???              [19] -> ???              [25] -> ???              [31] -> ???".center(size)}
 {"[02] -> Cookie fetcher   [08] -> ???              [14] -> ???              [20] -> ???              [26] -> ???              [32] -> ???".center(size)}
 {"[03] -> IP generator     [09] -> ???              [15] -> ???              [21] -> ???              [27] -> ???              [33] -> ???".center(size)}
 {"[04] -> Leaked IP search [10] -> ???              [16] -> ???              [22] -> ???              [28] -> ???              [34] -> ???".center(size)}
 {"[05] -> Uncensored ai    [11] -> ???              [17] -> ???              [23] -> ???              [29] -> ???              [35] -> ???".center(size)}
-{"[06] -> ???              [12] -> ???              [18] -> ???              [24] -> ???              [30] -> ???              [36] -> >>>".center(size)}
+{"[06] -> Webcam spy       [12] -> ???              [18] -> ???              [24] -> ???              [30] -> ???              [36] -> >>>".center(size)}
 """
     for x in ["[","]","->"]:
         opts = opts.replace(x, f"{dorange}{x}{orange}")
@@ -319,11 +414,15 @@ dsc.gg/saturrn
     c = input(f"{dorange}({orange}Option{dorange}){orange} {res}->{orange} ")
     print(f"{orange}Prepearing...")
     options = {
-        "1": Modules.TempMail().tempmail_run,
-        "2": Modules.Cookie_fetcher().fetch,
-        "3": Modules.IPgen().run,
-        "4": Modules.IPSearch().main,
-        "5": Modules.AI().run,
+        "star": Modules.star().run,
+        "STAR": Modules.star().run,
+        "1": Modules.temp_mail().run,
+        "2": Modules.cookie_fetcher().run,
+        "3": Modules.ip_generator().run,
+        "4": Modules.leaked_ip_search().run,
+        "5": Modules.uncensored_ai().run,
+        "6": Modules.webcam_spy().run,
+        "7": Modules.random_ss().run,
     }
 
     if c in options:
@@ -334,7 +433,6 @@ dsc.gg/saturrn
 {"      ..'            .'       `.        |      |         | |    `.     |    `.     |      ``..  | ".center(size)}
 {"....''             .'           `.      |      `._______.' |      `.   |      `.   |          ``| ".center(size)}
 """
-
         print(banner)
         options[c]()
     else:
