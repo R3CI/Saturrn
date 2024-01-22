@@ -8,7 +8,7 @@
 
 ## 🌟 Stars to Unlock
 
-- ❌ 25 Stars | ???
+- ❌ 25 Stars | Spoofer 
 
 - ❌ 50 Stars | ???
 
