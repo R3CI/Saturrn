@@ -1,10 +1,12 @@
-# Saturrn tool
- Multi tool with features that will make your life easier and better. If an error occurs, please report it via [issues](https://github.com/R3CI/Saturrn/issues/new).
-
-
-## 💻 Preview
-
-<img src="https://i.imgur.com/iZ15a9w.png">
+<p align="center">
+  <img src="https://i.imgur.com/Y2gCPFV.png" width="250" height="250">
+</p>
+<p align="center">
+  Saturrn
+</p>
+<p align="center">
+  Tool that makes your life easier and better 
+</p>
 
 ## 🌟 Stars to Unlock
 
